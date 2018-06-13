@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input, ContentChild, ViewChild } from '@angular/core';
 import { IStatus, Status } from '../../interfaces/status';
+
+
 /**
  * Generated class for the InputControlComponent component.
  *
@@ -16,30 +18,30 @@ export class InputControlComponent implements IStatus {
   @Input() inputPlaceholderText: string;
   @Input() buttonText: string;
 
-  @Output() done: EventEmitter<any> = new EventEmitter();
+  @Output() done: EventEmitter<string> = new EventEmitter();
   
-  inputText: string;
+  @Output() inputText: string;
 
   value: any;
   currentStatus: Status;
 
+  ngAfterViewInit(){
+  }
 
   constructor() {
-    //this.setStatus(Status.NotActive);
-    //this.currentClass = 'active';
     this.labelText = 'labelText';
     this.inputText = 'ez egy input text';
     this.buttonText = 'ez egy button text';
-    this.value = "bla";
     this.inputPlaceholderText="vmi"
   }
 
   empty(): void {
-    
+    this.inputText='';  
   }
+
   setStatus(status: Status): void {
     this.currentStatus = status;
-    switch (status) {
+    /*switch (status) {
       case Status.NotActive:
         break;
 
@@ -49,19 +51,15 @@ export class InputControlComponent implements IStatus {
       case Status.Ready:
         break;
 
-    }
-  }
-
-  private isTerminable() {
-    return this.currentStatus == Status.Active
-      && this.validate(this.value);
-
+    }*/
   }
 
   gotClicked() {
-    if (this.isTerminable()) {
-      alert(this.inputText);
+    if (this.validate(this.inputText)) {
       this.done.emit(this.inputText);
+    }
+    else{
+      alert("Hibás bemenet!");
     }
   }
 

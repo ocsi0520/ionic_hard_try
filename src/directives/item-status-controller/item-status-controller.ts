@@ -18,6 +18,7 @@ export class ItemStatusControllerDirective {
   //@ContentChildren('status') listOfItems: QueryList<IStatus>;
   private listOfItems: Array<IStatus>;
   private currentControlIndex: number;
+  private listOfResults: Array<any>=new Array<any>();
 
   constructor() {
     this.currentControlIndex = 0;
@@ -32,18 +33,20 @@ export class ItemStatusControllerDirective {
   private initChildren() {
     for (let i = this.listOfItems.length - 1; i >= 1; i--) {
       this.listOfItems[i].setStatus(Status.NotActive);
-      this.listOfItems[i].done.subscribe(() => this.controlDone());
+      this.listOfItems[i].done.subscribe((result) => this.controlDone(result));
     }
     this.listOfItems[0].setStatus(Status.Active);
-    this.listOfItems[0].done.subscribe(() => this.controlDone());
+    this.listOfItems[0].done.subscribe((result) => this.controlDone(result));
   }
 
-  controlDone() {
+  controlDone(res: any) {
+    this.listOfResults.push(res);
     if (this.currentControlIndex < this.listOfItems.length)
       this.nextControl();
   }
 
-  controlUndone() {
+  controlUndone(res: any) {
+    this.listOfResults.pop(); //__change__ --> az utolsót kiveszi, de mi van, ha későbbiekben nem csak az utolsót szeretnénk kivenni (nem szekvenciális működés esetén)
     if (this.currentControlIndex > 0)
       this.previousControl();
   }

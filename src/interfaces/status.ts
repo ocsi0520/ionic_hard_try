@@ -1,4 +1,4 @@
-import { EventEmitter, Type } from "@angular/core";
+import { EventEmitter } from "@angular/core";
 
 export enum Status {
   NotActive,
