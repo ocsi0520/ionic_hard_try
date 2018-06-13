@@ -17,7 +17,8 @@ export class InputControlComponent implements IStatus {
   @Input() buttonText: string;
 
   @Output() done: EventEmitter<any> = new EventEmitter();
-  @Output() inputText: string;
+  
+  inputText: string;
 
   value: any;
   currentStatus: Status;
@@ -59,7 +60,8 @@ export class InputControlComponent implements IStatus {
 
   gotClicked() {
     if (this.isTerminable()) {
-      this.done.emit();
+      alert(this.inputText);
+      this.done.emit(this.inputText);
     }
   }
 

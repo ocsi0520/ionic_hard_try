@@ -9,6 +9,7 @@ import { ItemStatusControllerDirective } from '../../directives/item-status-cont
 })
 export class HomePage {
   @ViewChild('myFirstContainer') container2: ItemStatusControllerDirective;
+  elsoValue: string="asd";
   constructor(public navCtrl: NavController) {
 
   }
@@ -22,7 +23,7 @@ export class HomePage {
   }
 
   elso() {
-    alert("első lement");
+    alert(this.elsoValue);
   }
 
 }
