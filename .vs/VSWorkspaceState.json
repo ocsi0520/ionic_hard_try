@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\components",
+    "\\src\\components\\input-control",
+    "\\src\\directives",
+    "\\src\\directives\\item-status-controller",
+    "\\src\\interfaces",
+    "\\src\\pages",
+    "\\src\\pages\\home"
+  ],
+  "SelectedNode": "\\src\\components\\input-control\\input-control.html",
+  "PreviewInSolutionExplorer": false
+}

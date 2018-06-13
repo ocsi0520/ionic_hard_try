@@ -7,8 +7,16 @@
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <div></div>
+  <div item-status-controller #myFirstContainer=item-status-controller>
+    <input-control [validate]="inputValidator" labelText="home-ról label" inputPlaceholderText="home-ról placeholder"
+                   buttonText="home-ról buttontext" inputText="elsoValue" (done)="elso()" #status></input-control>
+    <p>other things</p>
+    <input-control #status></input-control>
+    <input-control #status></input-control>
+    <p>other things</p>
+    <input-control #status></input-control>
+  </div>
+  <!--<button ion-item (click)="tryPrevious()">hello</button>-->
+  <button ion-item (click)="tryPrevious()">hello</button>
 </ion-content>
