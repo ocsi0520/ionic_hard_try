@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Input, ContentChild, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { IStatus, Status } from '../../interfaces/status';
 
 
@@ -13,16 +13,15 @@ import { IStatus, Status } from '../../interfaces/status';
   templateUrl: 'input-control.html'
 })
 export class InputControlComponent implements IStatus {
-  @Input() validate(value: any): boolean { return true; }
   @Input() labelText: string;
   @Input() inputPlaceholderText: string;
   @Input() buttonText: string;
+  @Input() readyText: string;
 
-  @Output() done: EventEmitter<string> = new EventEmitter();
-  
-  @Output() inputText: string;
+  @Input() inputText: string;
 
-  value: any;
+  @Output() finish: EventEmitter<string> = new EventEmitter<string>();
+
   currentStatus: Status;
 
   ngAfterViewInit(){
@@ -32,7 +31,8 @@ export class InputControlComponent implements IStatus {
     this.labelText = 'labelText';
     this.inputText = 'ez egy input text';
     this.buttonText = 'ez egy button text';
-    this.inputPlaceholderText="vmi"
+    this.inputPlaceholderText = "vmi"
+    this.readyText = "readytextes téma";
   }
 
   empty(): void {
@@ -55,12 +55,7 @@ export class InputControlComponent implements IStatus {
   }
 
   gotClicked() {
-    if (this.validate(this.inputText)) {
-      this.done.emit(this.inputText);
-    }
-    else{
-      alert("Hibás bemenet!");
-    }
+    alert("lefutok");
+    this.finish.emit(this.inputText);
   }
-
 }

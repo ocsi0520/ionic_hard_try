@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ItemStatusControllerDirective } from '../../directives/item-status-controller/item-status-controller';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 
 @Component({
@@ -8,22 +9,66 @@ import { ItemStatusControllerDirective } from '../../directives/item-status-cont
   templateUrl: 'home.html'
 })
 export class HomePage {
-  @ViewChild('myFirstContainer') container2: ItemStatusControllerDirective;
+  @ViewChild('myFirstContainer') container: ItemStatusControllerDirective;
   elsoValue: string="asd";
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
 
   }
 
   tryPrevious() {
-    this.container2.controlUndone();
+    this.container.previousControl();
+  }
+
+  elso(text: string) {
+    alert("lefutottam és ezt kaptam: " + text);
+    if (this.inputValidator(text)) {
+      this.container.nextControl();
+    }
+    else {
+      this.presentPrompt();
+    }
   }
 
   inputValidator(text: string) {
-    return text.length > 2;
+    if (text.length > 2)
+      return true;
+    else {
+      this.presentPrompt();
+      return false;
+    }
   }
 
-  elso() {
-    alert(this.elsoValue);
+  presentPrompt() {
+    let al = this.alertCtrl.create({
+      title: 'Login',
+      inputs: [
+        {
+          name: 'username',
+          placeholder: 'Username'
+        },
+        {
+          name: 'password',
+          placeholder: 'Password',
+          type: 'password'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Login',
+          handler: data => {
+            alert(data);
+          }
+        }
+      ]
+    });
+    al.present();
   }
 
 }

@@ -9,8 +9,8 @@
 <ion-content padding>
   <div></div>
   <div item-status-controller #myFirstContainer=item-status-controller>
-    <input-control [validate]="inputValidator" labelText="home-ról label" inputPlaceholderText="home-ról placeholder"
-                   buttonText="home-ról buttontext" inputText="elsoValue" (done)="elso()" #status></input-control>
+    <input-control labelText="home-ról label" inputPlaceholderText="home-ról placeholder"
+                   buttonText="home-ról buttontext" inputText="elsoValue" (finish)="elso($event)" #status></input-control>
     <p>other things</p>
     <input-control #status></input-control>
     <input-control #status></input-control>

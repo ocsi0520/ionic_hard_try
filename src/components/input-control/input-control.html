@@ -16,10 +16,10 @@
 <!-- <ion-item [ngClass]="{ 'ready' : currentStatus == 2, 'active': currentStatus == 1}" *ngIf="currentStatus > 0"> -->
 <ion-item class="active" *ngIf="currentStatus == 1">
   <ion-label color="primary" floating [innerHTML]="labelText"></ion-label>
-  <ion-input #textBox [placeholder]="inputPlaceholderText" text-center [(ngModel)]="inputText"></ion-input>
+  <ion-input [placeholder]="inputPlaceholderText" text-center [(ngModel)]="inputText"></ion-input>
   <button item-end ion-button (click)="gotClicked()" [innerHTML]="buttonText"></button>
 </ion-item>
 
 <ion-item class="ready" *ngIf="currentStatus == 2">
-  <ion-label color="secondary" [innerHTML]="displayText"></ion-label>
+  <ion-label color="secondary" [innerHTML]="readyText"></ion-label>
 </ion-item>

@@ -11,7 +11,5 @@ export enum Status {
 export interface IStatus {
   empty(): void;
   setStatus(status: Status): void;
-  done: EventEmitter<any>;
-  value: any;
-  validate(value: any): boolean;
+  finish: EventEmitter<any>;
 }

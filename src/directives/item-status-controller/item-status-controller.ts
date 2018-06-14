@@ -14,11 +14,11 @@ import { IStatus, Status } from '../../interfaces/status';
 export class ItemStatusControllerDirective {
 
   @Output('all-finished') allFinished = new EventEmitter();
+  @Output('all-unfinished') allUnfinished = new EventEmitter();
   @ContentChildren('status') private queryListOfItems: QueryList<IStatus>;
-  //@ContentChildren('status') listOfItems: QueryList<IStatus>;
   private listOfItems: Array<IStatus>;
   private currentControlIndex: number;
-  private listOfResults: Array<any>=new Array<any>();
+  //private listOfResults: Array<any>=new Array<any>();
 
   constructor() {
     this.currentControlIndex = 0;
@@ -31,50 +31,40 @@ export class ItemStatusControllerDirective {
   }
 
   private initChildren() {
-    for (let i = this.listOfItems.length - 1; i >= 1; i--) {
+    for (let i = this.listOfItems.length - 1; i >= 1; i--)
       this.listOfItems[i].setStatus(Status.NotActive);
-      this.listOfItems[i].done.subscribe((result) => this.controlDone(result));
-    }
     this.listOfItems[0].setStatus(Status.Active);
-    this.listOfItems[0].done.subscribe((result) => this.controlDone(result));
   }
 
-  controlDone(res: any) {
-    this.listOfResults.push(res);
-    if (this.currentControlIndex < this.listOfItems.length)
-      this.nextControl();
+  nextControl() {
+
+    if (this.currentControlIndex < this.listOfItems.length) { //ha a mostani még benne van a listába
+      this.listOfItems[this.currentControlIndex].setStatus(Status.Ready); //akkor azt ready-zzük
+      if (++this.currentControlIndex != this.listOfItems.length)             //ha nem értünk a lista végére
+        this.listOfItems[this.currentControlIndex].setStatus(Status.Active); //akkor a következőt vesszük
+      else {
+        this.allFinished.emit();
+      }
+    }
+
   }
 
-  controlUndone(res: any) {
-    this.listOfResults.pop(); //__change__ --> az utolsót kiveszi, de mi van, ha későbbiekben nem csak az utolsót szeretnénk kivenni (nem szekvenciális működés esetén)
-    if (this.currentControlIndex > 0)
-      this.previousControl();
-  }
+  previousControl() {
+    if (this.currentControlIndex == 0) //ha az elsőnél járunk nem csinálunk semmit
+      return;
+    else {
 
-  private nextControl() {
-    this.listOfItems[this.currentControlIndex].setStatus(Status.Ready);
-    this.currentControlIndex++;
-    if (this.currentControlIndex < this.listOfItems.length)
-      this.listOfItems[this.currentControlIndex].setStatus(Status.Active);
-    else
-      this.allFinished.emit();
-  }
+      if (this.currentControlIndex < this.listOfItems.length) {   //ha listán belül vagyunk
+        this.listOfItems[this.currentControlIndex].setStatus(Status.NotActive);
+        this.listOfItems[--this.currentControlIndex].setStatus(Status.Active);
+      }
 
-  private previousControl() {
-    if (this.currentControlIndex < this.listOfItems.length)
-      this.listOfItems[this.currentControlIndex].setStatus(Status.NotActive);
-    this.currentControlIndex--;
-    if (this.currentControlIndex >= 0)
-      this.listOfItems[this.currentControlIndex].setStatus(Status.Active);
-  }
+      else { //ha listán kívül vagyunk
+        this.listOfItems[--this.currentControlIndex].setStatus(Status.Active);
+        this.allUnfinished.emit();
+      }
 
-  //Alternatív megoldás, de kevésbé átlátható
-  /*controlChange(isForward: boolean) {
-    let stat: Status = isForward ? Status.Ready : Status.NotActive
-    this.listOfItems[this.currentControlIndex].setStatus(stat);
-    this.currentControlIndex += isForward ? 1 : -1;
-    if (this.currentControlIndex < this.listOfItems.length && this.currentControlIndex>=0)
-    this.listOfItems[this.currentControlIndex].setStatus(Status.Active);
-  }*/
+    }
+  }
 
 }
