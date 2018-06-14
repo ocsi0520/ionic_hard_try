@@ -19,23 +19,34 @@ export class HomePage {
     this.container.previousControl();
   }
 
-  elso(text: string) {
-    alert("lefutottam és ezt kaptam: " + text);
-    if (this.inputValidator(text)) {
-      this.container.nextControl();
-    }
+
+  mind(text: string) {
+      this.container.nextControl(!this.inputValidator(text));
+  }
+
+  inputValidator(text?: string) {
+
+    if (text !== undefined && text.length > 3)
+      return true;
     else {
-      this.presentPrompt();
+      this.tooShortMessage(text, 3);
+      return false;
     }
   }
 
-  inputValidator(text: string) {
-    if (text.length > 2)
-      return true;
-    else {
-      this.presentPrompt();
-      return false;
-    }
+
+  tooShortMessage(text: string, minLength: number) {
+    //let al = this.alertCtrl.create({
+    //  message: `A megadott szöveg nem éri el a ${minLength} hosszt`,
+    //  subTitle: "Túl kevés.",
+    //  title: "Hiba!",
+    //  buttons: [
+    //    {
+    //      text: "okcsá"
+    //    }]
+    //});
+    //al.present();
+    alert(`a szöveg hossza csak ${minLength} hosszú, ami túl kevés :( sosad`);
   }
 
   presentPrompt() {
@@ -50,6 +61,10 @@ export class HomePage {
           name: 'password',
           placeholder: 'Password',
           type: 'password'
+        },
+        {
+          name: 'own',
+          disabled: true,
         }
       ],
       buttons: [
@@ -63,12 +78,26 @@ export class HomePage {
         {
           text: 'Login',
           handler: data => {
-            alert(data);
+            alert(data.username + " " + data.password);
+          }
+        },
+        {
+          text: 'sup',
+          handler: data => {
+            alert('sup');
           }
         }
-      ]
+      ],
     });
     al.present();
+  }
+
+  homePageDone() {
+    alert("coool megvagyok");
+  }
+
+  homepageUndone() {
+    alert(":'( mégse");
   }
 
 }

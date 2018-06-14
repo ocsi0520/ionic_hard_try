@@ -36,17 +36,18 @@ export class ItemStatusControllerDirective {
     this.listOfItems[0].setStatus(Status.Active);
   }
 
-  nextControl() {
-
-    if (this.currentControlIndex < this.listOfItems.length) { //ha a mostani még benne van a listába
-      this.listOfItems[this.currentControlIndex].setStatus(Status.Ready); //akkor azt ready-zzük
-      if (++this.currentControlIndex != this.listOfItems.length)             //ha nem értünk a lista végére
-        this.listOfItems[this.currentControlIndex].setStatus(Status.Active); //akkor a következőt vesszük
-      else {
-        this.allFinished.emit();
+  nextControl(inappropriate?: boolean) { //ha undefined --> nincs validáció, ha false --> van validáció de átment, ha true --> van validáció és nem ment át, ekkor kell focus-álni rá
+    if (inappropriate) { this.listOfItems[this.currentControlIndex].focus(); }
+    else {
+      if (this.currentControlIndex < this.listOfItems.length) { //ha a mostani még benne van a listába
+        this.listOfItems[this.currentControlIndex].setStatus(Status.Ready); //akkor azt ready-zzük
+        if (++this.currentControlIndex != this.listOfItems.length)             //ha nem értünk a lista végére
+          this.listOfItems[this.currentControlIndex].setStatus(Status.Active); //akkor a következőt vesszük
+        else {
+          this.allFinished.emit();
+        }
       }
     }
-
   }
 
   previousControl() {
@@ -66,5 +67,4 @@ export class ItemStatusControllerDirective {
 
     }
   }
-
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input, ViewChild } from '@angular/core';
 import { IStatus, Status } from '../../interfaces/status';
 
 
@@ -24,15 +24,17 @@ export class InputControlComponent implements IStatus {
 
   currentStatus: Status;
 
-  ngAfterViewInit(){
+  @ViewChild('inputTextBox') inputTextBox;
+  
+  focus(): void {
+    setTimeout(() => this.inputTextBox.setFocus());
   }
 
   constructor() {
-    this.labelText = 'labelText';
-    this.inputText = 'ez egy input text';
-    this.buttonText = 'ez egy button text';
-    this.inputPlaceholderText = "vmi"
-    this.readyText = "readytextes téma";
+    this.labelText = 'Here you can write';
+    this.buttonText = 'Ok';
+    this.inputPlaceholderText = "Place to write"
+    this.readyText = "InputControl is ready";
   }
 
   empty(): void {
@@ -41,21 +43,17 @@ export class InputControlComponent implements IStatus {
 
   setStatus(status: Status): void {
     this.currentStatus = status;
-    /*switch (status) {
+    switch (status) {
       case Status.NotActive:
         break;
 
       case Status.Active:
+        this.focus();
         break;
 
       case Status.Ready:
         break;
 
-    }*/
-  }
-
-  gotClicked() {
-    alert("lefutok");
-    this.finish.emit(this.inputText);
+    }
   }
 }

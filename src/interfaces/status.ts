@@ -12,4 +12,5 @@ export interface IStatus {
   empty(): void;
   setStatus(status: Status): void;
   finish: EventEmitter<any>;
+  focus(): void;
 }

@@ -10,14 +10,16 @@
     css utilites
     https://ionicframework.com/docs/theming/css-utilities/
 
-
+    az alján fasza keyboard dolog
+    https://mhartington.io/post/setting-input-focus/
     -->
 <!--<ion-item [ngClass]="currentClass" *ngIf="currentStatus>0">-->
 <!-- <ion-item [ngClass]="{ 'ready' : currentStatus == 2, 'active': currentStatus == 1}" *ngIf="currentStatus > 0"> -->
+
 <ion-item class="active" *ngIf="currentStatus == 1">
   <ion-label color="primary" floating [innerHTML]="labelText"></ion-label>
-  <ion-input [placeholder]="inputPlaceholderText" text-center [(ngModel)]="inputText"></ion-input>
-  <button item-end ion-button (click)="gotClicked()" [innerHTML]="buttonText"></button>
+  <ion-input #inputTextBox [placeholder]="inputPlaceholderText" text-center [(ngModel)]="inputText"></ion-input>
+  <button item-end ion-button (click)="this.finish.emit(this.inputText)" [innerHTML]="buttonText"></button>
 </ion-item>
 
 <ion-item class="ready" *ngIf="currentStatus == 2">

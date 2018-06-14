@@ -8,14 +8,12 @@
 
 <ion-content padding>
   <div></div>
-  <div item-status-controller #myFirstContainer=item-status-controller>
+  <div item-status-controller #myFirstContainer=item-status-controller (all-finished)="homePageDone()" (all-unfinished)="homePageUndone()">
     <input-control labelText="home-ról label" inputPlaceholderText="home-ról placeholder"
-                   buttonText="home-ról buttontext" inputText="elsoValue" (finish)="elso($event)" #status></input-control>
-    <p>other things</p>
-    <input-control #status></input-control>
-    <input-control #status></input-control>
-    <p>other things</p>
-    <input-control #status></input-control>
+                   buttonText="home-ról buttontext" (finish)="mind($event)" #status></input-control>
+    <input-control (finish)="mind($event)" #status></input-control>
+    <input-control (finish)="mind($event)" #status></input-control>
+    <input-control (finish)="mind($event)" #status></input-control>
   </div>
   <!--<button ion-item (click)="tryPrevious()">hello</button>-->
   <button ion-item (click)="tryPrevious()">hello</button>
