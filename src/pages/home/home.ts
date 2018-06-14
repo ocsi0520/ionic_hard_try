@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ItemStatusControllerDirective } from '../../directives/item-status-controller/item-status-controller';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
-
+import { SimpleDataProvider } from '../../providers/simple-data/simple-data';
 
 @Component({
   selector: 'page-home',
@@ -10,8 +10,7 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 })
 export class HomePage {
   @ViewChild('myFirstContainer') container: ItemStatusControllerDirective;
-  elsoValue: string="asd";
-  constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController, private dataProvider: SimpleDataProvider) {
 
   }
 
@@ -93,11 +92,11 @@ export class HomePage {
   }
 
   homePageDone() {
-    alert("coool megvagyok");
+    this.dataProvider.doWhatever("homepage");
   }
 
   homepageUndone() {
-    alert(":'( mégse");
+    this.dataProvider.doWhatever("homedown :'(");
   }
 
 }

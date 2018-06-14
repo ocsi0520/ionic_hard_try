@@ -8,7 +8,7 @@
 
 <ion-content padding>
   <div></div>
-  <div item-status-controller #myFirstContainer=item-status-controller (all-finished)="homePageDone()" (all-unfinished)="homePageUndone()">
+  <div item-status-controller #myFirstContainer=item-status-controller (all-finished)="homePageDone()" (all-unfinished)="homepageUndone()">
     <input-control labelText="home-ról label" inputPlaceholderText="home-ról placeholder"
                    buttonText="home-ról buttontext" (finish)="mind($event)" #status></input-control>
     <input-control (finish)="mind($event)" #status></input-control>

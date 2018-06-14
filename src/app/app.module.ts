@@ -8,6 +8,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { InputControlComponent } from '../components/input-control/input-control';
 import { ItemStatusControllerDirective } from '../directives/item-status-controller/item-status-controller';
+import { SimpleDataProvider } from '../providers/simple-data/simple-data';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { ItemStatusControllerDirective } from '../directives/item-status-control
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -28,7 +31,8 @@ import { ItemStatusControllerDirective } from '../directives/item-status-control
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    SimpleDataProvider
   ]
 })
 export class AppModule {}
