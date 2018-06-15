@@ -22,19 +22,23 @@ export class InputControlComponent implements IStatus {
 
   @Output() finish: EventEmitter<string> = new EventEmitter<string>();
 
+  errors: Array<string>;
+
   currentStatus: Status;
 
   @ViewChild('inputTextBox') inputTextBox;
   
   focus(): void {
-    setTimeout(() => this.inputTextBox.setFocus());
+    setTimeout(() => {
+      this.inputTextBox.setFocus();
+    });
   }
 
   constructor() {
-    this.labelText = 'Here you can write';
-    this.buttonText = 'Ok';
-    this.inputPlaceholderText = "Place to write"
-    this.readyText = "InputControl is ready";
+    this.labelText = 'labelText';
+    this.buttonText = 'buttonText';
+    this.inputPlaceholderText = "inputPlaceholderText "
+    this.readyText = "readyText ";
   }
 
   empty(): void {
@@ -48,12 +52,16 @@ export class InputControlComponent implements IStatus {
         break;
 
       case Status.Active:
-        this.focus();
+        //this.focus();
         break;
 
       case Status.Ready:
         break;
 
     }
+  }
+
+  setErrors(errors: Array<string>) {
+    this.errors = errors;
   }
 }

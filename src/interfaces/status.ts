@@ -13,4 +13,5 @@ export interface IStatus {
   setStatus(status: Status): void;
   finish: EventEmitter<any>;
   focus(): void;
+  setErrors(errors: Array<string>): void;
 }

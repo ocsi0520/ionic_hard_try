@@ -4,11 +4,15 @@ input-control {
     text-align: center;
   }
 
-  ion-item.active {
+  .active {
     background-color: aquamarine;
   }
 
-  ion-item.ready {
+  .ready {
     background-color: greenyellow;
+  }
+
+  .error{
+    color: red;
   }
 }

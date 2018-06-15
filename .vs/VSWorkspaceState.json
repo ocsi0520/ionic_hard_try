@@ -7,10 +7,10 @@
     "\\src\\components\\input-control",
     "\\src\\directives",
     "\\src\\directives\\item-status-controller",
-    "\\src\\interfaces",
     "\\src\\pages",
-    "\\src\\pages\\home"
+    "\\src\\providers",
+    "\\src\\providers\\simple-data"
   ],
-  "SelectedNode": "\\src\\components\\input-control\\input-control.html",
+  "SelectedNode": "\\src\\app\\app.module.ts",
   "PreviewInSolutionExplorer": false
 }

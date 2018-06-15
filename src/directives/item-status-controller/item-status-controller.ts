@@ -18,7 +18,6 @@ export class ItemStatusControllerDirective {
   @ContentChildren('status') private queryListOfItems: QueryList<IStatus>;
   private listOfItems: Array<IStatus>;
   private currentControlIndex: number;
-  //private listOfResults: Array<any>=new Array<any>();
 
   constructor() {
     this.currentControlIndex = 0;
@@ -30,30 +29,40 @@ export class ItemStatusControllerDirective {
     this.initChildren();
   }
 
+
   private initChildren() {
     for (let i = this.listOfItems.length - 1; i >= 1; i--)
       this.listOfItems[i].setStatus(Status.NotActive);
     this.listOfItems[0].setStatus(Status.Active);
+
+    this.focusCurrent();
   }
 
-  nextControl(inappropriate?: boolean) { //ha undefined --> nincs validáció, ha false --> van validáció de átment, ha true --> van validáció és nem ment át, ekkor kell focus-álni rá
-    if (inappropriate) { this.listOfItems[this.currentControlIndex].focus(); }
-    else {
+  evaluateErrors(errors: Array<string>) {
+    this.listOfItems[this.currentControlIndex].setErrors(errors);
+    if (errors.length === 0) //ha nincs error
+      this.nextControl();
+    else
+      this.focusCurrent();
+  }
+
+  nextControl() {
+
       if (this.currentControlIndex < this.listOfItems.length) { //ha a mostani még benne van a listába
         this.listOfItems[this.currentControlIndex].setStatus(Status.Ready); //akkor azt ready-zzük
-        if (++this.currentControlIndex != this.listOfItems.length)             //ha nem értünk a lista végére
-          this.listOfItems[this.currentControlIndex].setStatus(Status.Active); //akkor a következőt vesszük
+        if (++this.currentControlIndex != this.listOfItems.length) {             //ha nem értünk a lista végére
+          this.listOfItems[this.currentControlIndex].setStatus(Status.Active);
+          this.focusCurrent();
+        } //akkor a következőt vesszük
         else {
           this.allFinished.emit();
         }
       }
-    }
   }
 
   previousControl() {
-    if (this.currentControlIndex == 0) //ha az elsőnél járunk nem csinálunk semmit
-      return;
-    else {
+
+    if (this.currentControlIndex!=0) {
 
       if (this.currentControlIndex < this.listOfItems.length) {   //ha listán belül vagyunk
         this.listOfItems[this.currentControlIndex].setStatus(Status.NotActive);
@@ -64,7 +73,12 @@ export class ItemStatusControllerDirective {
         this.listOfItems[--this.currentControlIndex].setStatus(Status.Active);
         this.allUnfinished.emit();
       }
-
     }
+    this.focusCurrent();
+
+  }
+
+  focusCurrent() {
+    this.listOfItems[this.currentControlIndex].focus(); 
   }
 }

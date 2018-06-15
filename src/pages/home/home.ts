@@ -14,38 +14,32 @@ export class HomePage {
 
   }
 
+  ionViewDidLoad() {
+
+    setTimeout(() => {
+      this.container.focusCurrent();
+    });
+
+  }
+
   tryPrevious() {
     this.container.previousControl();
   }
 
 
   mind(text: string) {
-      this.container.nextControl(!this.inputValidator(text));
+    this.container.evaluateErrors(this.inputValidator(text));
   }
 
   inputValidator(text?: string) {
 
-    if (text !== undefined && text.length > 3)
-      return true;
-    else {
-      this.tooShortMessage(text, 3);
-      return false;
+    var errors = new Array<string>();
+
+    if (!text || text.length < 3) {
+      errors.push("Túl rövid szöveg");
     }
-  }
 
-
-  tooShortMessage(text: string, minLength: number) {
-    //let al = this.alertCtrl.create({
-    //  message: `A megadott szöveg nem éri el a ${minLength} hosszt`,
-    //  subTitle: "Túl kevés.",
-    //  title: "Hiba!",
-    //  buttons: [
-    //    {
-    //      text: "okcsá"
-    //    }]
-    //});
-    //al.present();
-    alert(`a szöveg hossza csak ${minLength} hosszú, ami túl kevés :( sosad`);
+    return errors;
   }
 
   presentPrompt() {
