@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import 'rxjs/add/operator/map';
 
 /*
   Generated class for the SimpleDataProvider provider.
@@ -22,7 +23,10 @@ export class SimpleDataProvider {
   }
 
   doWhatever(name: string) {
-    alert(`cshő ${name}, simpledataprovider vagyok`);
+    this.http.get('https://www.reddit.com/r/gifs/top/.json?limit=10&sort=hot').subscribe(data => {
+      console.log(data);
+    });
+    //alert(`cshő ${name}, simpledataprovider vagyok`);
   }
 
 }
