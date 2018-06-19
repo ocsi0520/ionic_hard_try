@@ -10,11 +10,14 @@ import { InputControlComponent } from '../components/input-control/input-control
 import { ItemStatusControllerDirective } from '../directives/item-status-controller/item-status-controller';
 import { SimpleDataProvider } from '../providers/simple-data/simple-data';
 import { HttpClientModule } from '@angular/common/http';
+import { GuestPage } from '../pages/guest/guest';
+
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
+    GuestPage,
     InputControlComponent,
     ItemStatusControllerDirective,
   ],
@@ -26,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    GuestPage,
   ],
   providers: [
     StatusBar,

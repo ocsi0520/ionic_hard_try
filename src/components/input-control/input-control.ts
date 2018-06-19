@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, Input, ViewChild, HostListener } from '@angular/core';
 import { IStatus, Status } from '../../interfaces/status';
+import { Keyboard } from 'ionic-angular';
 
 
 /**
@@ -34,7 +35,7 @@ export class InputControlComponent implements IStatus {
     });
   }
 
-  constructor() {
+  constructor(public keyboard: Keyboard) {
     this.labelText = 'labelText';
     this.buttonText = 'buttonText';
     this.inputPlaceholderText = "inputPlaceholderText "
@@ -63,5 +64,18 @@ export class InputControlComponent implements IStatus {
 
   setErrors(errors: Array<string>) {
     this.errors = errors;
+  }
+
+  //https://stackoverflow.com/questions/37362488/how-can-i-listen-for-keypress-event-on-the-whole-page
+  @HostListener('document:keypress', ['$event'])
+  keyPressHandler(event: KeyboardEvent) {
+    if (this.currentStatus == Status.Active && event.which === 13) {
+      event.stopImmediatePropagation();
+      this.finishInput();
+    }
+  }
+
+  finishInput() {
+    this.finish.emit(this.inputText);
   }
 }

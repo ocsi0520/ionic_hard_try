@@ -38,12 +38,25 @@ export class ItemStatusControllerDirective {
     this.focusCurrent();
   }
 
+  /**
+   * Set the current control, show errors if exist
+   * return true if there were no errors
+   *
+   * 
+   * @param errors an Array of strings that contains the messages of the errors
+   *
+   * TODO: errors should be an instance of a new class that contains only 1 element: the messages of errors
+   */
   evaluateErrors(errors: Array<string>) {
     this.listOfItems[this.currentControlIndex].setErrors(errors);
-    if (errors.length === 0) //ha nincs error
+    if (errors.length === 0) { //ha nincs error
       this.nextControl();
-    else
+      return true;
+    }
+    else {
       this.focusCurrent();
+      return false;
+    }
   }
 
   nextControl() {
