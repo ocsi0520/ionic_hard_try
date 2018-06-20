@@ -23,7 +23,7 @@ export class SimpleDataProvider {
   }
 
   readLocalFile() {
-    return this.http.get('../assets/simpleDatas.json');
+     return this.http.get('../assets/simpleDatas.json');
   }
 
   doWhatever(name: string) {
