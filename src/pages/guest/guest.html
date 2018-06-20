@@ -16,11 +16,15 @@
 <ion-content padding>
   <div>első: {{firstText}}</div>
   <div>utolsó: {{lastText}}</div>
-  <ion-item>
-    <ion-label>Gender</ion-label>
-    <ion-select [(ngModel)]="gender">
-      <ion-option value="f">Female</ion-option>
-      <ion-option value="m">Male</ion-option>
-    </ion-select>
-  </ion-item>
+  <form (ngSubmit)="sayHello()" [formGroup]="firstGroup">
+    <ion-item>
+      <ion-label>Gender</ion-label>
+      <ion-select formControlName="gender">
+        <ion-option value="f">Female</ion-option>
+        <ion-option value="m">Male</ion-option>
+      </ion-select>
+      <ion-input type="number" formControlName="age"></ion-input>
+    </ion-item>
+    <button ion-button type="submit" block>sup?</button>
+  </form>
 </ion-content>

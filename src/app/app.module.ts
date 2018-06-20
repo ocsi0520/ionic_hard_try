@@ -11,6 +11,7 @@ import { ItemStatusControllerDirective } from '../directives/item-status-control
 import { SimpleDataProvider } from '../providers/simple-data/simple-data';
 import { HttpClientModule } from '@angular/common/http';
 import { GuestPage } from '../pages/guest/guest';
+import { FormsPage } from '../pages/forms/forms';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { GuestPage } from '../pages/guest/guest';
     GuestPage,
     InputControlComponent,
     ItemStatusControllerDirective,
+    FormsPage,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +33,7 @@ import { GuestPage } from '../pages/guest/guest';
     MyApp,
     HomePage,
     GuestPage,
+    FormsPage,
   ],
   providers: [
     StatusBar,
