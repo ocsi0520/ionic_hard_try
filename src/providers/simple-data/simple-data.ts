@@ -22,6 +22,10 @@ export class SimpleDataProvider {
     console.log('Hello SimpleDataProvider Provider');
   }
 
+  readLocalFile() {
+    return this.http.get('../assets/simpleDatas.json');
+  }
+
   doWhatever(name: string) {
     this.http.get('https://www.reddit.com/r/gifs/top/.json?limit=10&sort=hot').subscribe(data => {
       console.log(data);

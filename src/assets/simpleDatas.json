@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Fehér",
+    "value": 1
+  },
+  {
+    "name": "Fekete",
+    "value": 2
+  },
+  {
+    "name": "Barna",
+    "value": 3
+  },
+  {
+    "name": "Sárga",
+    "value": 4
+  },
+  {
+    "name": "Zöld",
+    "value": 5
+  },
+  {
+    "name": "Piros",
+    "value": 6
+  }
+]
