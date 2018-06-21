@@ -6,6 +6,7 @@ import { SimpleDataProvider } from '../../providers/simple-data/simple-data';
 import { GuestPage } from '../guest/guest';
 import { Chart } from 'chart.js';
 import { SimpleDataModel } from '../../models/simple-data-model';
+import { Partner } from '../../models/partner-model';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class HomePage {
 
   simpleDatas: Array<SimpleDataModel> = new Array<SimpleDataModel>();
   doughnutChart: Chart;
+  selectedPartners: Partner[];
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, private dataProvider: SimpleDataProvider) {
 
   }
@@ -30,25 +32,25 @@ export class HomePage {
       this.container.focusCurrent();
     });
 
-    this.dataProvider.readLocalFile().subscribe(simpleDatas => {
-      this.simpleDatas = simpleDatas;
-      //let labels = this.simpleDatas.map(x => x.name);
-      //let values = this.simpleDatas.map(x => x.value);
-      //let colors = this.simpleDatas.map(x => x.color);
-      //this.createChart(labels,values,colors);
-    });
+    //this.dataProvider.readLocalFile().subscribe(simpleDatas => {
+    //  this.simpleDatas = simpleDatas;
+    //  let labels = this.simpleDatas.map(x => x.name);
+    //  let values = this.simpleDatas.map(x => x.value);
+    //  let colors = this.simpleDatas.map(x => x.color);
+    //  this.createChart(labels,values,colors);
+    //});
 
     this.dataProvider.readPartnersFromServer().subscribe(partners => {
-      let selectedPartners = new Array<Partner>();
+      this.selectedPartners = new Array<Partner>();
       for (var i = 0; i < 6; i++) {
-        selectedPartners.push(partners[Math.floor(Math.random() * partners.length)]);
+        this.selectedPartners.push(partners[Math.floor(Math.random() * partners.length)]);
       }
-      let labels = selectedPartners.map(x => x.name);
-      let values = selectedPartners.map(x => x.value);
+      let labels = this.selectedPartners.map(x => x.name);
+      let values = this.selectedPartners.map(x => x.value);
       this.createChart(labels, values, ['red', 'purple', 'yellow', 'green', 'brown', 'gray']);
     })
-    this.dataProvider.doWhatever('a');
-    this.dataProvider.readFromJsonPlaceholder();
+    //this.dataProvider.doWhatever('a');
+    //this.dataProvider.readFromJsonPlaceholder();
   }
 
   createChart(labels: string[], values: number[], colors: string[]) {
@@ -61,33 +63,18 @@ export class HomePage {
         datasets: [{
           label: '# of Votes',
           data: values,
-          //backgroundColor: [
-          //  'rgba(255, 99, 132, 0.2)',
-          //  'rgba(54, 162, 235, 0.2)',
-          //  'rgba(255, 206, 86, 0.2)',
-          //  'rgba(75, 192, 192, 0.2)',
-          //  'rgba(153, 102, 255, 0.2)',
-          //  'rgba(255, 159, 64, 0.2)'
-          //],
           backgroundColor: colors,
-          //hoverBackgroundColor: [
-          //  // "#FF6384",
-          //  // "#36A2EB",
-          //  // "#FFCE56",
-          //  // "#FF6384",
-          //  // "#36A2EB",
-          //  // "#FFCE56"
-          //  'rgba(255, 99, 132, 1)',
-          //  'rgba(54, 162, 235, 1)',
-          //  'rgba(255, 206, 86, 1)',
-          //  'rgba(75, 192, 192, 1)',
-          //  'rgba(153, 102, 255, 1)',
-          //  'rgba(255, 159, 64, 1)'
-          //]
+          //hoverBackgroundColor: []
         }]
-      }
-
+      },
     });
+    console.log(this.doughnutChart);
+  }
+
+  chartClicked(evt) {
+    let chartElement = this.doughnutChart.getElementAtEvent(evt)[0];
+    alert("A választott partner: " + this.doughnutChart.data.labels[chartElement._index]);
+
   }
 
   tryPrevious() {

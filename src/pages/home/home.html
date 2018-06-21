@@ -14,7 +14,7 @@
     <input-control (finish)="mind($event)" #status></input-control>
     <input-control (finish)="mind($event)" #status></input-control>
   </div>
-    <canvas #doughnutCanvas></canvas>
+    <canvas #doughnutCanvas (click)="chartClicked($event)"></canvas>
   <!--<button ion-item (click)="tryPrevious()">hello</button>-->
 </ion-content>
 
