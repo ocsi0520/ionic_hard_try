@@ -1,26 +1,32 @@
 [
   {
     "name": "Fehér",
-    "value": 1
+    "value": 12,
+    "color":  "white"
   },
   {
     "name": "Fekete",
-    "value": 2
+    "value": 21,
+    "color": "black"
   },
   {
     "name": "Barna",
-    "value": 3
+    "value": 43,
+    "color":  "brown"
   },
   {
     "name": "Sárga",
-    "value": 4
+    "value": 44,
+    "color": "yellow"
   },
   {
     "name": "Zöld",
-    "value": 5
+    "value": 25,
+    "color": "green"
   },
   {
     "name": "Piros",
-    "value": 6
+    "value": 11,
+    "color": "red"
   }
 ]

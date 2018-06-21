@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
+import { SimpleDataModel } from '../../models/simple-data-model';
 
 /*
   Generated class for the SimpleDataProvider provider.
@@ -13,6 +14,9 @@ http provider:
 local json file:
   https://stackoverflow.com/questions/46399228/how-to-read-a-local-file-json-in-ionic?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 
+With HttpClient, you don't need map(res => res.json())
+(https://stackoverflow.com/questions/47564687/angular-5-json-does-not-exist-on-type-object?rq=1)
+
 */
 @Injectable()
 export class SimpleDataProvider {
@@ -23,7 +27,7 @@ export class SimpleDataProvider {
   }
 
   readLocalFile() {
-     return this.http.get('../assets/simpleDatas.json');
+    return this.http.get('../assets/simpleDatas.json').map(res => <SimpleDataModel[]>res);
   }
 
   doWhatever(name: string) {

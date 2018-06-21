@@ -5,6 +5,8 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { SimpleDataProvider } from '../../providers/simple-data/simple-data';
 import { GuestPage } from '../guest/guest';
 import { Chart } from 'chart.js';
+import { SimpleDataModel } from '../../models/simple-data-model';
+
 
 @Component({
   selector: 'page-home',
@@ -17,8 +19,7 @@ export class HomePage {
   @ViewChild('myFirstContainer') container: ItemStatusControllerDirective;
   @ViewChild('doughnutCanvas') doughnutCanvas;
 
-  showableLabels: Array<string>=new Array<string>();
-  showableValues: Array<number> = new Array<number>();
+  simpleDatas: Array<SimpleDataModel> = new Array<SimpleDataModel>();
   doughnutChart: Chart;
   constructor(public navCtrl: NavController, private alertCtrl: AlertController, private dataProvider: SimpleDataProvider) {
 
@@ -29,49 +30,48 @@ export class HomePage {
       this.container.focusCurrent();
     });
 
-    this.dataProvider.readLocalFile().subscribe((res) => {
-      for (var i = 0; i < res.length; i++) {
-        console.log(res[i].name + " " + res[i].value);
-        this.showableLabels.push(res[i].name);
-        this.showableValues.push(res[i].value);
-      }
+    this.dataProvider.readLocalFile().subscribe(simpleDatas => {
+      this.simpleDatas = simpleDatas;
       this.createChart();
     });
-
   }
 
-  createChart(){
+  createChart() {
+    let labels = this.simpleDatas.map(x => x.name);
+    let values = this.simpleDatas.map(x => x.value);
+    let colors = this.simpleDatas.map(x => x.color);
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
       
       type: 'doughnut',
       data: {
         //labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        labels: this.showableLabels,
+        labels: labels,
         datasets: [{
           label: '# of Votes',
-          data: this.showableValues,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          hoverBackgroundColor: [
-            // "#FF6384",
-            // "#36A2EB",
-            // "#FFCE56",
-            // "#FF6384",
-            // "#36A2EB",
-            // "#FFCE56"
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ]
+          data: values,
+          //backgroundColor: [
+          //  'rgba(255, 99, 132, 0.2)',
+          //  'rgba(54, 162, 235, 0.2)',
+          //  'rgba(255, 206, 86, 0.2)',
+          //  'rgba(75, 192, 192, 0.2)',
+          //  'rgba(153, 102, 255, 0.2)',
+          //  'rgba(255, 159, 64, 0.2)'
+          //],
+          backgroundColor: colors,
+          //hoverBackgroundColor: [
+          //  // "#FF6384",
+          //  // "#36A2EB",
+          //  // "#FFCE56",
+          //  // "#FF6384",
+          //  // "#36A2EB",
+          //  // "#FFCE56"
+          //  'rgba(255, 99, 132, 1)',
+          //  'rgba(54, 162, 235, 1)',
+          //  'rgba(255, 206, 86, 1)',
+          //  'rgba(75, 192, 192, 1)',
+          //  'rgba(153, 102, 255, 1)',
+          //  'rgba(255, 159, 64, 1)'
+          //]
         }]
       }
 

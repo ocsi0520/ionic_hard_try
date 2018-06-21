@@ -2,16 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\app",
-    "\\src\\components",
-    "\\src\\components\\input-control",
-    "\\src\\directives",
-    "\\src\\directives\\item-status-controller",
-    "\\src\\interfaces",
+    "\\src\\assets",
+    "\\src\\assets\\icon",
+    "\\src\\assets\\imgs",
     "\\src\\pages",
-    "\\src\\pages\\guest",
-    "\\src\\providers"
+    "\\src\\pages\\forms",
+    "\\src\\pages\\home",
+    "\\src\\providers",
+    "\\src\\providers\\simple-data"
   ],
-  "SelectedNode": "\\src\\components\\input-control\\input-control.html",
+  "SelectedNode": "\\src\\providers",
   "PreviewInSolutionExplorer": false
 }
