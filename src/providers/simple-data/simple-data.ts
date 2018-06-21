@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { SimpleDataModel } from '../../models/simple-data-model';
+import { Partner } from '../../models/partner-model';
 
 /*
   Generated class for the SimpleDataProvider provider.
@@ -26,15 +27,30 @@ export class SimpleDataProvider {
     console.log('Hello SimpleDataProvider Provider');
   }
 
+  readPartnersFromServer() {
+    return this.http.get('http://172.16.1.5/webapp-api/Account/GetPartners/?json=true')
+      .map(res => <Partner[]>res
+        .map(x => new Partner(  x.Name, Number(x.Code) )  )
+      )
+  }
+
   readLocalFile() {
     return this.http.get('../assets/simpleDatas.json').map(res => <SimpleDataModel[]>res);
   }
 
   doWhatever(name: string) {
-    this.http.get('https://www.reddit.com/r/gifs/top/.json?limit=10&sort=hot').subscribe(data => {
-      console.log(data);
+    this.http.get('https://www.reddit.com/r/gifs/top/.json?limit=10&sort=hot')
+      .subscribe(data => {
+        console.log(data);
     });
     //alert(`cshő ${name}, simpledataprovider vagyok`);
+  }
+
+  readFromJsonPlaceholder() {
+    this.http.get('https://jsonplaceholder.typicode.com/albums')
+      .subscribe(data => {
+        console.log(data);
+      });
   }
 
 }

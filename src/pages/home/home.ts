@@ -32,16 +32,28 @@ export class HomePage {
 
     this.dataProvider.readLocalFile().subscribe(simpleDatas => {
       this.simpleDatas = simpleDatas;
-      this.createChart();
+      //let labels = this.simpleDatas.map(x => x.name);
+      //let values = this.simpleDatas.map(x => x.value);
+      //let colors = this.simpleDatas.map(x => x.color);
+      //this.createChart(labels,values,colors);
     });
+
+    this.dataProvider.readPartnersFromServer().subscribe(partners => {
+      let selectedPartners = new Array<Partner>();
+      for (var i = 0; i < 6; i++) {
+        selectedPartners.push(partners[Math.floor(Math.random() * partners.length)]);
+      }
+      let labels = selectedPartners.map(x => x.name);
+      let values = selectedPartners.map(x => x.value);
+      this.createChart(labels, values, ['red', 'purple', 'yellow', 'green', 'brown', 'gray']);
+    })
+    this.dataProvider.doWhatever('a');
+    this.dataProvider.readFromJsonPlaceholder();
   }
 
-  createChart() {
-    let labels = this.simpleDatas.map(x => x.name);
-    let values = this.simpleDatas.map(x => x.value);
-    let colors = this.simpleDatas.map(x => x.color);
+  createChart(labels: string[], values: number[], colors: string[]) {
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
-      
+
       type: 'doughnut',
       data: {
         //labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
