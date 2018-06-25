@@ -29,9 +29,11 @@ export class SimpleDataProvider {
 
   readPartnersFromServer() {
     return this.http.get('http://172.16.1.5/webapp-api/Account/GetPartners/?json=true')
-      .map(res => <Partner[]>res
-        .map(x => new Partner(  x.Name, Number(x.Code) )  )
-      )
+      .map(res => {
+        if (res instanceof Array) {
+          return <Partner[]>res.map(x => new Partner(x.Name, Number(x.Code)));
+        }
+      })
   }
 
   readLocalFile() {

@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { InputControlComponent } from './input-control/input-control';
+import { StatusComponent } from './status/status';
 @NgModule({
 	declarations: [
-    InputControlComponent],
+    InputControlComponent,
+    StatusComponent],
 	imports: [],
 	exports: [
-    InputControlComponent]
+    InputControlComponent,
+    StatusComponent]
 })
 export class ComponentsModule {}

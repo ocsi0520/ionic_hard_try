@@ -73,7 +73,8 @@ export class HomePage {
 
   chartClicked(evt) {
     let chartElement = this.doughnutChart.getElementAtEvent(evt)[0];
-    alert("A választott partner: " + this.doughnutChart.data.labels[chartElement._index]);
+    if (chartElement)
+      alert("A választott partner: " + this.doughnutChart.data.labels[chartElement._index]);
 
   }
 

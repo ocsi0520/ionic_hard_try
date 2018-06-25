@@ -12,6 +12,7 @@ import { SimpleDataProvider } from '../providers/simple-data/simple-data';
 import { HttpClientModule } from '@angular/common/http';
 import { GuestPage } from '../pages/guest/guest';
 import { FormsPage } from '../pages/forms/forms';
+import { StatusComponent } from '../components/status/status';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { FormsPage } from '../pages/forms/forms';
     HomePage,
     GuestPage,
     InputControlComponent,
+    StatusComponent,
     ItemStatusControllerDirective,
     FormsPage,
   ],

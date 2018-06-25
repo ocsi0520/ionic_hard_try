@@ -2,15 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\assets",
-    "\\src\\assets\\icon",
-    "\\src\\assets\\imgs",
-    "\\src\\pages",
+    "\\src\\app",
+    "\\src\\components",
+    "\\src\\components\\input-control",
+    "\\src\\components\\status",
     "\\src\\pages\\forms",
     "\\src\\pages\\home",
-    "\\src\\providers",
     "\\src\\providers\\simple-data"
   ],
-  "SelectedNode": "\\src\\providers",
+  "SelectedNode": "\\src\\components\\status\\status.html",
   "PreviewInSolutionExplorer": false
 }
