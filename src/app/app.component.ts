@@ -3,7 +3,8 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
+// import { HomePage } from '../pages/home/home';
+import { DatabaseTryingPage } from '../pages/database-trying/database-trying';
 //import { GuestPage } from '../pages/guest/guest';
 //import { FormsPage } from '../pages/forms/forms';
 
@@ -11,8 +12,9 @@ import { HomePage } from '../pages/home/home';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  // rootPage:any = HomePage;
   //rootPage: any = FormsPage;
+  rootPage:any = DatabaseTryingPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

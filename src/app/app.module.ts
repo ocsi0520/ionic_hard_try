@@ -13,6 +13,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { GuestPage } from '../pages/guest/guest';
 import { FormsPage } from '../pages/forms/forms';
 import { StatusComponent } from '../components/status/status';
+import { DatabaseTryingPage } from '../pages/database-trying/database-trying';
+import { DatabaseHandlerProvider } from '../providers/database-handler/database-handler';
+import { SQLite } from '@ionic-native/sqlite';
 
 
 @NgModule({
@@ -24,6 +27,7 @@ import { StatusComponent } from '../components/status/status';
     StatusComponent,
     ItemStatusControllerDirective,
     FormsPage,
+    DatabaseTryingPage,
   ],
   imports: [
     BrowserModule,
@@ -36,12 +40,15 @@ import { StatusComponent } from '../components/status/status';
     HomePage,
     GuestPage,
     FormsPage,
+    DatabaseTryingPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    SimpleDataProvider
+    SimpleDataProvider,
+    DatabaseHandlerProvider,
+    SQLite,
   ]
 })
 export class AppModule {}
